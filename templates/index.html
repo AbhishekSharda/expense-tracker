@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td, th {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .summary {
+            background: #eef5ff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💰 Expense Tracker</h1>
+
+    <h3>Add Expense</h3>
+
+    <form action="/add" method="POST">
+        <input type="text" name="amount" placeholder="Amount" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <div class="summary">
+        <h3>📊 Summary</h3>
+        <p><strong>Total Spending:</strong> {{ total }}</p>
+
+        <h4>Spending by Category:</h4>
+        <ul>
+            {% for category, amount in category_summary.items() %}
+                <li>{{ category }}: {{ amount }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h3>📋 Expense History</h3>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Description</th>
+        </tr>
+
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense[0] }}</td>
+            <td>{{ expense[1] }}</td>
+            <td>{{ expense[2] }}</td>
+            <td>{{ expense[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+</body>
+</html>
